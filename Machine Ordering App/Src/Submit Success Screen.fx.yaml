@@ -1,0 +1,296 @@
+"'Submit Success Screen' As screen":
+
+    Label1 As label:
+        Align: =Align.Center
+        Height: =80
+        Size: =16
+        Text: ="Your request has been successfully submitted. Thank you"
+        Width: =750
+        X: =308
+        Y: =75
+        ZIndex: =4
+
+    Header_2 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =4
+
+        "'Header Label_2' As label":
+            Align: =Align.Center
+            Color: =Color.White
+            Fill: =Color.Black
+            Height: =60
+            Size: =18
+            Text: ="Machine Ordering"
+            Width: =1366
+            X: |
+                =0
+            Y: |
+                =0
+            ZIndex: =1
+
+        "'User Label_2' As label":
+            Align: =Align.Right
+            Color: =Color.Gray
+            Text: ="Hello, " & User().FullName
+            Width: =200 
+            X: =1160
+            ZIndex: =2
+
+        "'Logo Image_2' As image":
+            Height: =60
+            Image: |-
+                ="https://images-us-prod.cms.commerce.dynamics.com/cms/api/qbvttlwqcm/imageFileData/MA20RY?ver=c4b6&m=6&q=100"
+            Width: =200
+            X: |
+                =0
+            ZIndex: =3
+
+    "'Success Button' As button":
+        Fill: =Color.Black
+        Height: =48
+        OnSelect: =Clear(CompareList); Navigate('Main Screen', ScreenTransition.None)
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Text: ="OK"
+        Width: =235
+        X: =600
+        Y: =700
+        ZIndex: =5
+
+    "'Machine Order Summary' As formViewer":
+        DataSource: ='Machine Orders'
+        Height: =400
+        Item: ='Machine Order Form'.LastSubmit
+        NumberOfColumns: =1
+        X: =283
+        Y: =180
+        ZIndex: =6
+
+        Price_DataCard2 As typedDataCard.USCurrencyViewCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="contoso_price"
+            Default: =ThisItem.Price
+            DisplayMode: =DisplayMode.View
+            DisplayName: =DataSourceInfo([@'Machine Orders'],DataSourceInfo.DisplayName,"contoso_price")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            Required: =true
+            Width: =800
+            X: =0
+            Y: =1
+            ZIndex: =1
+
+            DataCardKey9 As label:
+                AutoHeight: =true
+                Height: =34
+                Text: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (DataCardValue8.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            DataCardValue8 As label:
+                DisplayMode: =Parent.DisplayMode
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: |-
+                    =Text(Parent.Default, "$###.##")
+                Width: =Parent.Width - DataCardKey9.Width - 60
+                X: =DataCardKey9.X + DataCardKey9.Width
+                Y: =10
+                ZIndex: =2
+
+        Comments_DataCard2 As typedDataCard.textualViewCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="contoso_comments"
+            Default: =ThisItem.Comments
+            DisplayMode: =DisplayMode.View
+            DisplayName: =DataSourceInfo([@'Machine Orders'],DataSourceInfo.DisplayName,"contoso_comments")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =40
+            Required: =false
+            Width: =800
+            X: =0
+            Y: =2
+            ZIndex: =1
+
+            DataCardKey10 As label:
+                AutoHeight: =true
+                Height: =34
+                Text: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (DataCardValue9.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            DataCardValue9 As label:
+                AutoHeight: =true
+                DisplayMode: =Parent.DisplayMode
+                Height: =27
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Default
+                Width: =(Parent.Width - 60) * 0.6
+                X: =DataCardKey10.X + DataCardKey10.Width
+                Y: =10
+                ZIndex: =2
+
+        Approver_DataCard2 As typedDataCard.emailViewCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="contoso_approver"
+            Default: =ThisItem.Approver
+            DisplayMode: =DisplayMode.View
+            DisplayName: =DataSourceInfo([@'Machine Orders'],DataSourceInfo.DisplayName,"contoso_approver")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =40
+            Required: =false
+            Width: =800
+            X: =0
+            Y: =3
+            ZIndex: =1
+
+            DataCardKey11 As label:
+                AutoHeight: =true
+                Height: =34
+                Text: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (DataCardValue10.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            DataCardValue10 As htmlViewer:
+                AutoHeight: =true
+                DisplayMode: =Parent.DisplayMode
+                Height: =31
+                HtmlText: |-
+                    ="<a href='mailto:" & Parent.Default & "'>" & Parent.Default & "</a>"
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Width: =(Parent.Width - 60) * 0.6
+                X: =DataCardKey11.X + DataCardKey11.Width
+                Y: =10
+                ZIndex: =2
+
+        "'Requested By_DataCard2' As typedDataCard.emailViewCard":
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="contoso_requestedby"
+            Default: =ThisItem.'Requested By'
+            DisplayMode: =DisplayMode.View
+            DisplayName: =DataSourceInfo([@'Machine Orders'],DataSourceInfo.DisplayName,"contoso_requestedby")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =40
+            Required: =false
+            Width: =800
+            X: =0
+            Y: =4
+            ZIndex: =1
+
+            DataCardKey12 As label:
+                AutoHeight: =true
+                Height: =34
+                Text: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (DataCardValue11.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            DataCardValue11 As htmlViewer:
+                AutoHeight: =true
+                DisplayMode: =Parent.DisplayMode
+                Height: =31
+                HtmlText: |-
+                    ="<a href='mailto:" & Parent.Default & "'>" & Parent.Default & "</a>"
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Width: =(Parent.Width - 60) * 0.6
+                X: =DataCardKey12.X + DataCardKey12.Width
+                Y: =10
+                ZIndex: =2
+
+        "'Requested Date_DataCard2' As typedDataCard.textualViewCard":
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="contoso_requesteddate"
+            Default: =ThisItem.'Requested Date'
+            DisplayMode: =DisplayMode.View
+            DisplayName: =DataSourceInfo([@'Machine Orders'],DataSourceInfo.DisplayName,"contoso_requesteddate")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =40
+            Required: =false
+            Width: =800
+            X: =0
+            Y: =5
+            ZIndex: =1
+
+            DataCardKey13 As label:
+                AutoHeight: =true
+                Height: =34
+                Text: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (DataCardValue12.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            DataCardValue12 As label:
+                AutoHeight: =true
+                DisplayMode: =Parent.DisplayMode
+                Height: =27
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Default
+                Width: =(Parent.Width - 60) * 0.6
+                X: =DataCardKey13.X + DataCardKey13.Width
+                Y: =10
+                ZIndex: =2
+
+        "'Machine Name_DataCard2' As typedDataCard.textualViewCard":
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="contoso_machinename"
+            Default: =ThisItem.'Machine Name'
+            DisplayMode: =DisplayMode.View
+            DisplayName: =DataSourceInfo([@'Machine Orders'],DataSourceInfo.DisplayName,"contoso_machinename")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =40
+            Required: =true
+            Width: =800
+            X: =0
+            Y: =0
+            ZIndex: =7
+
+            DataCardKey2 As label:
+                AutoHeight: =true
+                Height: =34
+                Text: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (DataCardValue2.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            DataCardValue2 As label:
+                AutoHeight: =true
+                DisplayMode: =Parent.DisplayMode
+                Height: =27
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Default
+                Width: =(Parent.Width - 60) * 0.6
+                X: =DataCardKey2.X + DataCardKey2.Width
+                Y: =10
+                ZIndex: =2
+
